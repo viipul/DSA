@@ -1,0 +1,71 @@
+556. Next Greater Element III
+Medium
+
+2196
+
+344
+
+Add to List
+
+Share
+Given a positive integer n, find the smallest integer which has exactly the same digits existing in the integer n and is greater in value than n. If no such positive integer exists, return -1.
+
+Note that the returned integer should fit in 32-bit integer, if there is a valid answer but it does not fit in 32-bit integer, return -1.
+
+ 
+
+Example 1:
+
+Input: n = 12
+Output: 21
+Example 2:
+
+Input: n = 21
+Output: -1
+ 
+
+Constraints:
+
+1 <= n <= 231 - 1
+
+
+Python Solution:
+
+class Solution(object):
+    def nextGreaterElement(self, arr):
+        if arr>int(2**31-1):
+            return -1
+       
+        arr=[int(i) for i in str(arr)]
+        n=len(arr)
+        first_swap=-1
+        for i in range(n-1,0,-1):
+            if arr[i-1]<arr[i]:
+                first_swap=i-1
+                break
+        
+        second_swap=-1
+        
+        for i in range(n-1,0,-1):
+            if arr[i]>arr[first_swap]:
+                second_swap=i
+                break
+       
+        if first_swap==-1 or second_swap==-1:
+            return -1
+        arr[first_swap],arr[second_swap]=arr[second_swap],arr[first_swap]
+        if len(arr)==2:
+            ans=arr
+        else:
+            first_arr=arr[:first_swap+1]
+            second_arr=arr[first_swap+1:]
+            ans=first_arr+second_arr[::-1]
+       
+        final_ans=''
+        for i in ans:
+            final_ans+=str(i)
+        if int(final_ans)>int(2**31-1):
+            return -1
+        return int(final_ans)
+        
+                
