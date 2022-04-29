@@ -1,0 +1,58 @@
+Difficulty Level : Medium
+Given an array, print the Next Smaller Element (NSE) for every element. The NSE for an element x is the first smaller element on the right side of x in array. Elements for which no smaller element exist (on right side), consider NSE as -1. 
+Examples: 
+a) For any array, rightmost element always has NSE as -1. 
+b) For an array which is sorted in increasing order, all elements have NSE as -1. 
+c) For the input array [4, 8, 5, 2, 25}, the NSE for each element are as follows.
+
+Element         NSE
+   4      -->    2
+   8      -->    5
+   5      -->    2
+   2      -->   -1
+   25     -->   -1
+d) For the input array [13, 7, 6, 12}, the next smaller elements for each element are as follows.  
+
+  Element        NSE
+   13      -->    7
+   7       -->    6
+   6       -->   -1
+   12      -->   -1
+   
+   
+   
+   Optimized Python Solution:
+   
+   Time Complexity: O(N)   
+   Space Complexity: O(N)   
+   
+
+  def next_smaller(self, arr, n):
+
+      marks_stack=[0]
+      ans={}
+
+      for i in range(1,n):
+
+          next_element=arr[i]
+
+          if len(marks_stack)==0:
+              marks_stack.append(i)
+              continue
+
+
+          while len(marks_stack)>0 and next_element<arr[marks_stack[-1]]:
+
+              ans[marks_stack[-1]]=next_element
+              marks_stack.pop() 
+
+          marks_stack.append(i)
+
+      while len(marks_stack)>0:
+          ans[marks_stack[-1]]=-1
+          marks_stack.pop()
+      final_ans=[]
+      for i in range(n):
+          final_ans.append(ans[i])
+      return final_ans
+
