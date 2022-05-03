@@ -1,0 +1,41 @@
+https://leetcode.com/problems/can-make-arithmetic-progression-from-sequence/
+
+class Solution(object):
+    def canMakeArithmeticProgression(self, arr):
+        if len(arr)<=2:
+            return True
+        if len(set(arr))==1:
+            return True
+        min_1=min(arr)
+        min_2=10e6
+        
+        all_ele={}
+        
+        
+        
+        for i in arr:
+            if i in all_ele:
+                return False
+            else:
+                all_ele[i]=1
+                
+            if i<min_2 and i!=min_1:
+                min_2=i
+                
+        d=min_2-min_1
+        
+        max_ele=max(arr)
+        
+        for i in all_ele:
+            if i==max_ele:
+                continue
+            if i+d not in all_ele:
+                return False
+        return True
+                
+
+        """
+        :type arr: List[int]
+        :rtype: bool
+        """
+        
