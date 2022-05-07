@@ -1,0 +1,43 @@
+https://leetcode.com/problems/divide-two-integers/
+
+class Solution(object):
+    def divide(self, dividend, divisor):
+        ans=0
+        if divisor==1 or divisor==-1:
+            ans=divisor*dividend
+            if ans>2147483647:
+                ans=2147483647
+            if ans<-2147483648:
+                ans=-2147483648
+            return ans
+        
+        
+        
+        abs_dividend=abs(dividend)
+        abs_divisor=abs(divisor)
+        
+        while abs_dividend-abs_divisor>=0:
+            curr_ans=0
+           
+            while abs_dividend-((abs_divisor<<1)<<curr_ans)>=0:
+                curr_ans+=1
+                
+            ans+=1<<curr_ans
+            abs_dividend-=abs_divisor<<curr_ans
+        
+        
+        if ans>2147483647:
+            ans=2147483647
+        if ans<-2147483648:
+            ans=-2147483648
+        if divisor<0 and dividend<0:
+            return ans
+        if divisor<0 or dividend<0:
+            return -1*ans
+        return ans
+        """
+        :type dividend: int
+        :type divisor: int
+        :rtype: int
+        """
+        
