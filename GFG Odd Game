@@ -1,0 +1,10 @@
+https://practice.geeksforgeeks.org/problems/odd-game5040/1/#
+
+def oddGame(self, N):
+      if N==1:
+          return 1
+
+      ans=1
+      while ans<N:
+          ans*=2
+      return ans//2
